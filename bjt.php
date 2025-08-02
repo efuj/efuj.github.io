@@ -1,0 +1,13 @@
+<?php
+/*
+自动生成最新8日内随机图片,每日更新一幅
+可用于类似DIYP,百川影音等启动背景图接口
+*/
+$Num=rand(0,7);
+$url="http://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=8"; 
+$info=file_get_contents($url);
+preg_match_all('|"url":"(.*?)"|',$info,$tp); 
+$tp="http://cn.bing.com".$tp[1][$Num];
+$tp=str_replace('jpg&pid=hp','png',$tp);
+header("location:".$tp);
+?>
